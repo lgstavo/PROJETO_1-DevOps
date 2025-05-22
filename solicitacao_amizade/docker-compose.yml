@@ -14,7 +14,7 @@ services:
       DB_USER: meu_app_user
       DB_PASSWORD: meu_app_password
       DB_NAME: meu_app_db
-      JWT_SECRET: 'senha123' # IMPORTANTE: Mude isso!
+      JWT_SECRET: 'senha123' 
     networks:
       - app-network
     restart: unless-stopped
@@ -36,7 +36,7 @@ services:
     ports:
       - "3307:3306" # Mapeia para 3307 no host para evitar conflito se já tiver MySQL rodando na 3306
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword # Senha do root (use algo mais seguro)
+      MYSQL_ROOT_PASSWORD: rootpassword 
       MYSQL_DATABASE: meu_app_db
       MYSQL_USER: meu_app_user
       MYSQL_PASSWORD: meu_app_password
