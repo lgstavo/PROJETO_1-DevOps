@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const JWT_SECRET = process.env.JWT_SECRET || 'seuSegredoSuperSecretoParaJWT-MUDEISSO';
+const JWT_SECRET = process.env.JWT_SECRET || 'senha123';
 
 app.use(cors());
 app.use(express.json());
