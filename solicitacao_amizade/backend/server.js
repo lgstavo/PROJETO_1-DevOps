@@ -280,7 +280,7 @@ app.post('/logout', authenticateToken, (req, res) => {
 
 // Rota de Teste
 app.get('/', (req, res) => {
-    res.send('Backend Meu App Simples funcionando!');
+    res.send('Backend Solicitação de Amizade funcionando!');
 });
 
 app.listen(PORT, '0.0.0.0', () => { // Escuta em todas as interfaces de rede dentro do container
