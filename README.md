@@ -1,4 +1,7 @@
-# PROJETO_1-DevOps
+# Pratica 1 -DevOps
+
+Aluno: Luiz Gustavo da Silva Barros
+RA: 800225
 
 O Projeto a seguir consiste em um sistema com o objetivo de executar, via Docker e containers, uma aplicação que faça requisições de Login, Cadastro e conexão entre os usuários.
 O sistema proporciona que o usuário possa fazer cadastro, login e visualize outros usuários utilizando a mesma aplicação.
