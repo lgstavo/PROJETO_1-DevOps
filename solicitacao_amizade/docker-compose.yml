@@ -1,0 +1,61 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      # A porta do backend ainda precisa ser exposta ao host para que o navegador
+      # (que acessa o frontend em localhost:8080) possa fazer requisições API.
+      # Em um cenário de produção mais complexo com um reverse proxy na frente de tudo,
+      # isso poderia ser diferente, mas para este projeto, manteremos.
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_USER: meu_app_user
+      DB_PASSWORD: meu_app_password
+      DB_NAME: meu_app_db
+      JWT_SECRET: 'senha123' # Mantenha um segredo forte e diferente em produção real
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80" # Necessário para o usuário acessar a aplicação no navegador
+    # O Nginx servirá os arquivos copiados para a imagem durante o build.
+    # volumes:
+    #   - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - backend # O frontend em si não depende do backend para build/start, mas não prejudica.
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: meu_app_db
+      MYSQL_USER: meu_app_user
+      MYSQL_PASSWORD: meu_app_password
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql # Script de inicialização do schema
+      - mysql_data:/var/lib/mysql # Volume para persistir os dados do banco
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u$$MYSQL_USER", "-p$$MYSQL_PASSWORD"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data: # Volume nomeado para persistir dados do MySQL
+
+networks:
+  app-network:
+    driver: bridge
