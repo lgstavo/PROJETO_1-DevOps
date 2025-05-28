@@ -19,6 +19,7 @@ E, por fim, para o Banco de Dados, utilizamos a linguagem MySQL, presente na pas
 Para utilizar o programa inteiro, basta executar via Docker, através do comando:
 
 cd solicitacao_amizade
+
 docker compose up --build
 
 A partir disso, é possível observar a execução do programa em localhost:8080, que abrirá a opção de fazer login ou fazer cadastro no sistema.
