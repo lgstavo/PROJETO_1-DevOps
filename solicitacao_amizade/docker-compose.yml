@@ -15,7 +15,7 @@ services:
       DB_USER: meu_app_user
       DB_PASSWORD: meu_app_password
       DB_NAME: meu_app_db
-      JWT_SECRET: 'senha123' # Mantenha um segredo forte e diferente em produção real
+      JWT_SECRET: 'senha123' 
     networks:
       - app-network
     restart: unless-stopped
